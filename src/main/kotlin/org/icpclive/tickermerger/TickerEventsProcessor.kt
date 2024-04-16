@@ -30,7 +30,7 @@ class TickerEventsProcessor(private val managers: Map<String, TickerManager>, pr
     }
 
     suspend fun run(coroutineScope: CoroutineScope) {
-        coroutineScope.scheduleSwitch(5000, null)
+        coroutineScope.scheduleSwitch(1000, null)
 
         events.collect { processorEvent ->
             when (processorEvent) {
@@ -110,7 +110,7 @@ class TickerEventsProcessor(private val managers: Map<String, TickerManager>, pr
             currentShownMessagesIds[key]?.let { manager.remove(it) }
             currentShownMessagesIds[key] = null
         }
-        switchJob = coroutineScope.scheduleSwitch(5000, null)
+        switchJob = coroutineScope.scheduleSwitch(250, null)
     }
 
     private suspend fun showMessage(coroutineScope: CoroutineScope, contest: String, newMessage: TickerMessage) {

@@ -49,7 +49,7 @@ private suspend fun runWebsocketListening(
                     processors.forEach { it.processEvent(contest, event) }
                 }
             }
-        } catch (e: RuntimeException) {
+        } catch (e: Exception) {
             logger.warn("WebSocket connection to $url failed", e)
         }
         delay(1.seconds)
